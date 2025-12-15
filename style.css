@@ -7,4 +7,15 @@
 
 * {
     font-family: "Cinzel", "Times New Roman";
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    height: 100vh
+}
+
+footer {
+    margin-top: auto
 }
