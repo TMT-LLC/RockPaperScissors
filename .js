@@ -56,18 +56,24 @@ function rps(humanSelection, computerSelection) {
     if ((humanSelection === "rock" && computerSelection === "scissors") || (humanSelection ==="paper" && computerSelection === "rock") || (humanSelection === "scissors" && computerSelection === "paper"
     )){
         console.log("User chose: " + humanSelection  + ". Computer chose: " + computerSelection + ". User Wins!")
-        return console.log("User has won: " + (u + 1) + " times.")
+        console.log("User has won: " + (u + 1) + " time(s).")
+        return true
     } 
     // Computer win scenario
     else if ((computerSelection === "rock" && humanSelection === "scissors") || (computerSelection ==="paper" && humanSelection === "rock") || (computerSelection === "scissors" && humanSelection === "paper"
     )){
         console.log("User chose: " + humanSelection  + ". Computer chose: " + computerSelection + ". Computer Wins!")
-        return console.log("Computer has won: " + (c + 1) + " times.")
+        console.log("Computer has won: " + (c + 1) + " time(s).")
+        return true
     }
     // Tie scenario
-    else {
+    else if ((humanSelection === "rock" && computerSelection === "rock") || (humanSelection ==="paper" && computerSelection === "paper") || (humanSelection === "scissors" && computerSelection === "scissors"
+    )) {
         console.log("User and Computer chose same optios, TIE!")
         return false
     }
 
 }
+
+// Call function, with variables of user and computer choice being used
+rps(humanSelection, computerSelection)
