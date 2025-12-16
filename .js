@@ -14,8 +14,8 @@ function getHumanChoice(choice) {
     choice = choice.toLowerCase()
     if (choice === "rock" || choice === "paper" || choice === "scissors") {
         // Output successful choice message, can move onto next function for CPU
-        choice = choice.toUpperCase()
-        return console.log("Valid Option! You chose: " + choice);
+        console.log("Valid Option!")
+        return choice;
     } else {
         // Output unsuccessful choice message, ask user to try again
         return console.log("Invalid Option, try again!");
@@ -28,22 +28,46 @@ function getComputerChoice() {
     choice = ((Math.random()) * 10)
     if (choice <= 3) {
         // 3 and below chooses Rock
-        return console.log("ROCK")
+        return "rock"
     } else if (choice <= 6){
         // 6 and below chooses Paper
-        return console.log("PAPER")
+        return "paper"
     } else {
         // 10 and below chooses Scissors
-        return console.log("SCISSORS")
+        return "scissors"
     }
 }
 
+// Keep track of choices to determine winner, define new variables to be used
+const humanSelection = getHumanChoice()
+const computerSelection = getComputerChoice()
+
+console.log(humanSelection)
+console.log(computerSelection)
+
+// Initialize vlaues for score of each player
+let u = 0
+let c = 0
+
 // Take both User and Computer input, analyze to determine winner, and output information
-function rps() {
-    getHumanChoice()
-    getComputerChoice()
+function rps(humanSelection, computerSelection) {
 
-    
+    // User win scenario
+    if ((humanSelection === "rock" && computerSelection === "scissors") || (humanSelection ==="paper" && computerSelection === "rock") || (humanSelection === "scissors" && computerSelection === "paper"
+    )){
+        console.log("User chose: " + humanSelection  + ". Computer chose: " + computerSelection + ". User Wins!")
+        return console.log("User has won: " + (u + 1) + " times.")
+    } 
+    // Computer win scenario
+    else if ((computerSelection === "rock" && humanSelection === "scissors") || (computerSelection ==="paper" && humanSelection === "rock") || (computerSelection === "scissors" && humanSelection === "paper"
+    )){
+        console.log("User chose: " + humanSelection  + ". Computer chose: " + computerSelection + ". Computer Wins!")
+        return console.log("Computer has won: " + (c + 1) + " times.")
+    }
+    // Tie scenario
+    else {
+        console.log("User and Computer chose same optios, TIE!")
+        return false
+    }
+
 }
-
-rps()
