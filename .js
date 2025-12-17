@@ -34,18 +34,14 @@
 
 // Random choice for the 'Computer'
 function getComputerChoice() {
-    // Randomly selects a crude number between 1 and 10
-    choice = ((Math.random()) * 10)
-    if (choice <= 3) {
-        // 3 and below chooses Rock
-        return "rock"
-    } else if (choice <= 6){
-        // 6 and below chooses Paper
-        return "paper"
-    } else {
-        // 10 and below chooses Scissors
-        return "scissors"
-    }
+    // Creates array of choice for the computer to choose from using const (unable to change)
+    const choices = ["rock", "paper", "scissors"]
+    // Use math.random, to randomly select a number from the array (0, 1, 2)
+    // Use choices.length with a value of 3, to multiply the math.random to give that amount of options for possible use
+    // Use math.floor to round up all possible values to avoid 2.99
+    const randonChoice = Math.floor(Math.random() * choices.length)
+    // From choices array, uses randomChoice variable (random value of 0, 1, or 2) to chose an option from the array
+    return choices[randonChoice]
 }
 
 // Keep track of choices to determine winner, define new variables to be used
