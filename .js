@@ -7,30 +7,30 @@
 // Show who the winner is and keep track of all previous moves.
 
 // User's choice selection logic/algorithm
-    // Input for user's choice
-    function getHumanChoice() {
-        // Asks for user's choice
-        // Ensures that user's input is always converted to lowercase for validation
-        let choice = prompt("Rock, Paper, or Scissors? (Don't worry, the computer won't cheat...)").toLowerCase();
-        // Validates choice once lowercased to match either rock, paper, scissors, or false if invalid
-        return validateHumanChoice(choice)
-    }
+// Input for user's choice
+function getHumanChoice() {
+    // Asks for user's choice
+    // Ensures that user's input is always converted to lowercase for validation
+    let choice = prompt("Rock, Paper, or Scissors? (Don't worry, the computer won't cheat...)").toLowerCase();
+    // Validates choice once lowercased to match either rock, paper, scissors, or false if invalid
+    return validateHumanChoice(choice)
+}
 
-    // Validate user's choice
-    function validateHumanChoice (choice) {
-        // Only allows choice to be following options
-        if ((choice === "rock") | ("paper") | ("scissors")) {
-            // Output successful choice message, can move onto next function for CPU
-            console.log("Valid Option!")
-            // Returns valid choice option
-            return choice;
-        } else {
-            // Output unsuccessful choice message, ask user to try again
-            console.log("Invalid Option, try again!");
-            // Returns false, unable to use value for getHumanChoice
-            return false
-        }
+// Validate user's choice
+function validateHumanChoice (choice) {
+    // Only allows choice to be following options
+    if ((choice === "rock") | ("paper") | ("scissors")) {
+        // Output successful choice message, can move onto next function for CPU
+        console.log("Valid Option!")
+        // Returns valid choice option
+        return choice;
+    } else {
+        // Output unsuccessful choice message, ask user to try again
+        console.log("Invalid Option, try again!");
+        // Returns false, unable to use value for getHumanChoice
+        return false
     }
+}
 
 // Random choice for the 'Computer'
 function getComputerChoice() {
@@ -43,7 +43,6 @@ function getComputerChoice() {
     // From choices array, uses randomChoice variable (random value of 0, 1, or 2) to chose an option from the array
     return choices[randonChoice]
 }
-
 
 // Take both User and Computer input (parameters made from const global variables), analyze to determine winner, and output information to console.
 function rps(humanSelection, computerSelection) {
@@ -68,14 +67,58 @@ function rps(humanSelection, computerSelection) {
     }
 }
 
-// Keep track of choices to determine winner, define new variables to be used
-const humanSelection = getHumanChoice() // See lines 9-33
-const computerSelection = getComputerChoice() // See lines 35-45
+// Initialize starting scores for user and computer to be stored
+// Initialize history of moves to be stored
 
-// Call function, with parameters of user and computer choice being used
-const result = rps(humanSelection, computerSelection) // See lines 48-69
+// Keep track of score and rounds played for loop
+// These are global variables so these will always persist to be referenced at any time
+let humanScore = 0;
+let computerScore = 0;
+let tieScore = 0;
+let playAgain = true;
+
+// Start of game start loop
+// While loop works as follows, as long as value in parameters is true, the game will keep playing
+while (playAgain){
+
+    const humanSelection = getHumanChoice() // See lines 9-33
+    // Ensures that the game doesn't proceed if the Human choice is invalid and will ask the user again, if the parameter equals false, null, undefined, or "" then game will end
+    if (!humanSelection) {
+        // Checks if value if false, then restart loop
+        // continue says "Stop this round of the loop and start again"
+        // break says to "Stop the entire loop immidiately"
+        continue; 
+    }
+
+    const computerSelection = getComputerChoice() // See lines 35-45
+
+    // Show choices in console after user validation/prompting and computer random selection
+    console.log("User chose: " + humanSelection.toUpperCase())
+    console.log("Computer chose: " + computerSelection.toUpperCase())
 
 
+    // Call function, with parameters of user and computer choice being used
+    const result = rps(humanSelection, computerSelection) // See lines 48-69
+    
+    // Update global variable scores based on rps function
+    if (result === "user") {
+        // Increment human score by 1 point
+        humanScore++;
+    } else if (result === "computer") {
+        // Increment computer score by 1 point
+        computerScore++;
+    } else if (result === "tie") {
+        // Increment tie score by 1 point
+        tieScore++;
+    }
+
+    // Ask user to play another round, prompts with gui text box
+    playAgain = confirm("Try Again?")
+
+}
+
+console.log("Game Over!");
+console.log("Final Score: \nUser: " + humanScore + "\nComputer: " + computerScore + "\nTie: " + tieScore)
 
 
 
