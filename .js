@@ -44,42 +44,38 @@ function getComputerChoice() {
     return choices[randonChoice]
 }
 
-// Keep track of choices to determine winner, define new variables to be used
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice()
 
-console.log(humanSelection)
-console.log(computerSelection)
-
-// Initialize vlaues for score of each player
-let u = 0
-let c = 0
-
-// Take both User and Computer input, analyze to determine winner, and output information
+// Take both User and Computer input (parameters made from const global variables), analyze to determine winner, and output information to console.
 function rps(humanSelection, computerSelection) {
 
-    // User win scenario
-    if ((humanSelection === "rock" && computerSelection === "scissors") || (humanSelection ==="paper" && computerSelection === "rock") || (humanSelection === "scissors" && computerSelection === "paper"
-    )){
-        console.log("User chose: " + humanSelection  + "! Computer chose: " + computerSelection + ". User Wins!")
-        console.log("User has won: " + (u + 1) + " time(s).")
-        return u + 1
-    } 
-    // Computer win scenario
-    else if ((computerSelection === "rock" && humanSelection === "scissors") || (computerSelection ==="paper" && humanSelection === "rock") || (computerSelection === "scissors" && humanSelection === "paper"
-    )){
-        console.log("User chose: " + humanSelection  + "! Computer chose: " + computerSelection + ". Computer Wins!")
-        console.log("Computer has won: " + (c + 1) + " time(s).")
-        return c + 1
-    }
-    // Tie scenario
-    else if ((humanSelection === "rock" && computerSelection === "rock") || (humanSelection ==="paper" && computerSelection === "paper") || (humanSelection === "scissors" && computerSelection === "scissors"
-    )) {
-        console.log("User and Computer both chose " + humanSelection + ", TIE!")
-        return false
+    // Simple Tie scenario where both choices are the same
+    if (humanSelection === computerSelection) {
+        console.log("Tie!")
+        return "tie";
     }
 
+    // Explicitly stating in an array what beats what
+    const winningMoves = {rock: "scissors", paper: "rock", scissors: "paper"
+    }
+
+    // Simple win decider algorithm using const winningMoves array
+    if (winningMoves[humanSelection] === computerSelection) {
+        console.log("User Wins!")
+        return "user";
+    } else {
+        console.log("Computer Wins!")
+        return "computer";
+    }
 }
 
+// Keep track of choices to determine winner, define new variables to be used
+const humanSelection = getHumanChoice() // See lines 9-33
+const computerSelection = getComputerChoice() // See lines 35-45
+
 // Call function, with parameters of user and computer choice being used
-rps(humanSelection, computerSelection)
+const result = rps(humanSelection, computerSelection) // See lines 48-69
+
+
+
+
+
